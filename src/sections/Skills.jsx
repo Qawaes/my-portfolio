@@ -1,127 +1,129 @@
-import { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import {
-  Code2,
-  Cpu,
-  Wrench,
-  Terminal,
-  Globe,
-  GitBranch,
-  Lightbulb,
-  Users,
-  Brain,
-} from "lucide-react";
+import { Code, Cpu, Zap } from "lucide-react";
 
-const skills = {
-  "Programming Languages": [
-    { name: "C", level: 85, icon: <Code2 />, info: "System-level programming and embedded systems." },
-    { name: "Python", level: 90, icon: <Terminal />, info: "Automation, AI, and backend scripting." },
-    { name: "Java", level: 75, icon: <Cpu />, info: "OOP concepts, Android, and server-side apps." },
-    { name: "JavaScript", level: 80, icon: <Globe />, info: "Frontend logic and interactive web experiences." },
-  ],
-  "Frameworks & Tools": [
-    { name: "React", level: 85, icon: <Globe />, info: "Building fast, modern UIs and SPAs." },
-    { name: "Node.js", level: 75, icon: <Cpu />, info: "Server-side APIs and full-stack apps." },
-    { name: "Tailwind CSS", level: 80, icon: <Wrench />, info: "Utility-first responsive UI design." },
-    { name: "Git & GitHub", level: 90, icon: <GitBranch />, info: "Version control and collaboration." },
-  ],
-  "Soft Skills": [
-    { name: "Leadership", level: 95, icon: <Users />, info: "Leading teams and fostering collaboration." },
-    { name: "Teamwork", level: 90, icon: <Users />, info: "Effective communication and collaboration." },
-    { name: "Problem Solving", level: 92, icon: <Brain />, info: "Critical thinking and analytical reasoning." },
-    { name: "Creativity", level: 88, icon: <Lightbulb />, info: "Innovative and user-centric design thinking." },
-  ],
-};
-
-export default function Skills() {
-  const [tooltip, setTooltip] = useState({ text: "", visible: false, x: 0, y: 0 });
-
-  const handleMouseMove = (e, info) => {
-    setTooltip({
-      text: info,
-      visible: true,
-      x: e.clientX + 15,
-      y: e.clientY - 25,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setTooltip({ ...tooltip, visible: false });
-  };
+const Skills = () => {
+  const skillCategories = [
+    {
+      title: "Frontend Development",
+      icon: <Code className="text-blue-400 w-8 h-8 mb-3" />,
+      skills: [
+        { name: "React", level: 90 },
+        { name: "JavaScript (ES6+)", level: 85 },
+        { name: "HTML & CSS", level: 95 },
+        { name: "Tailwind CSS", level: 80 },
+      ],
+    },
+    {
+      title: "Backend & Systems",
+      icon: <Cpu className="text-purple-400 w-8 h-8 mb-3" />,
+      skills: [
+        { name: "Flask", level: 80 },
+        { name: "Python", level: 88 },
+        { name: "SQLite & PostgreSQL", level: 75 },
+        { name: "API Design", level: 82 },
+      ],
+    },
+    {
+      title: "Engineering & Tools",
+      icon: <Zap className="text-yellow-400 w-8 h-8 mb-3" />,
+      skills: [
+        { name: "C Programming", level: 90 },
+        { name: "Git & Version Control", level: 85 },
+        { name: "Linux / CLI", level: 78 },
+        { name: "Networking Fundamentals", level: 83 },
+      ],
+    },
+  ];
 
   return (
     <section
       id="skills"
-      className="relative min-h-screen bg-gradient-to-b from-black to-gray-900 text-white py-20 px-8 flex flex-col justify-center items-center"
+      className="relative min-h-screen bg-black/60 backdrop-blur-sm text-white py-20 px-8 flex flex-col justify-center items-center overflow-hidden"
     >
+      {/* background gradient pulse */}
+      {/* <div className="absolute -z-10 w-[40rem] h-[40rem] bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"></div> */}
+
       <motion.h2
-        className="text-4xl font-bold mb-12 text-blue-400"
-        initial={{ opacity: 0, y: 40 }}
+        className="text-4xl font-bold text-center mb-6 text-blue-400"
+        initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1 }}
       >
-        Skills & Expertise
+        Skills
       </motion.h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
-        {Object.entries(skills).map(([category, list], i) => (
+      <p className="text-gray-400 max-w-2xl text-center mb-14">
+        I merge software engineering and telecommunication expertise to craft
+        scalable, secure, and user-focused solutions. From building clean UIs
+        with React to designing robust backends and understanding system-level
+        logic, I believe great tech blends both creativity and precision.
+      </p>
+
+      <div className="grid md:grid-cols-3 gap-10 w-full max-w-6xl">
+        {skillCategories.map((category, i) => (
           <motion.div
-            key={category}
-            className="bg-white/10 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:shadow-blue-500/20 transition"
-            initial={{ opacity: 0, y: 50 }}
+            key={category.title}
+            className="p-6 bg-gradient-to-br from-gray-900/60 to-gray-800/40 rounded-2xl border border-gray-700 shadow-lg hover:shadow-blue-500/20 transition-transform"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2 }}
+            transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
+            whileHover={{ y: -5, scale: 1.02 }}
           >
-            <h3 className="text-2xl font-semibold mb-4 text-blue-300 flex items-center gap-2">
-              {i === 0 && <Code2 />}
-              {i === 1 && <Wrench />}
-              {i === 2 && <Users />}
-              {category}
-            </h3>
+            <div className="flex flex-col items-center mb-4">
+              {category.icon}
+              <h3 className="text-xl font-semibold text-blue-400 mb-2 text-center">
+                {category.title}
+              </h3>
+            </div>
 
-            {list.map((skill) => (
-              <div
-                key={skill.name}
-                className="mb-5 relative cursor-pointer"
-                onMouseMove={(e) => handleMouseMove(e, skill.info)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <div className="flex justify-between items-center text-sm mb-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-blue-400">{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </div>
-                  <span>{skill.level}%</span>
+            {category.skills.map((skill) => (
+              <div key={skill.name} className="mb-5">
+                <div className="flex justify-between mb-2">
+                  <span className="text-gray-300">{skill.name}</span>
+                  <span className="text-gray-400 text-sm">{skill.level}%</span>
                 </div>
-
-                <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                <motion.div
+                  className="w-full h-2 bg-gray-700 rounded-full overflow-hidden"
+                  whileHover={{ scaleY: 1.2 }}
+                >
                   <motion.div
-                    className="bg-blue-500 h-2 rounded-full"
+                    className="bg-blue-500 h-2 rounded-full shadow-lg shadow-blue-500/30"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     transition={{ duration: 1.2 }}
                   />
-                </div>
+                </motion.div>
               </div>
             ))}
           </motion.div>
         ))}
       </div>
 
-      {/* Tooltip */}
-      {tooltip.visible && (
-        <motion.div
-          className="fixed px-3 py-1 text-xs bg-blue-600 text-white rounded-lg pointer-events-none z-50"
-          style={{
-            top: tooltip.y,
-            left: tooltip.x,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          {tooltip.text}
-        </motion.div>
-      )}
+      {/* Currently Exploring Section */}
+      <motion.div
+        className="mt-16 text-center"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
+        <h3 className="text-2xl font-semibold text-blue-400 mb-4">
+          Currently Exploring 
+        </h3>
+        <div className="flex flex-wrap justify-center gap-3 text-gray-300">
+          <span className="px-4 py-2 bg-blue-500/20 rounded-full border border-blue-400/30">
+            Next.js
+          </span>
+          <span className="px-4 py-2 bg-purple-500/20 rounded-full border border-purple-400/30">
+            Flask APIs
+          </span>
+          <span className="px-4 py-2 bg-yellow-500/20 rounded-full border border-yellow-400/30">
+            Cybersecurity
+          </span>
+        </div>
+      </motion.div>
     </section>
   );
-}
+};
+
+export default Skills;

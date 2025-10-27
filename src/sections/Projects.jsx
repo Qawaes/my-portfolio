@@ -73,7 +73,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }} 
-            viewport={{ once: true }} // 👈 stay visible after animation
+            viewport={{ once: true }} 
             whileHover={{ scale: 1.05 }}
           >
             <h3 className="text-2xl font-semibold text-blue-300 mb-3">

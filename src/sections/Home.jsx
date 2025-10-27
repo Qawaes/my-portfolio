@@ -72,8 +72,8 @@ export default function Home() {
   transition={{ delay: 1 }}
 >
   I’m passionate about crafting intelligent, human-centered systems that
-  bridge <span className="text-blue-400 font-semibold">software</span> and 
-  <span className="text-purple-400 font-semibold">engineering</span>. 
+  bridge <span className="text-blue-400 font-semibold">software</span> ,
+  and <span className="text-purple-400 font-semibold">engineering</span>. 
   I thrive at the intersection of creativity and logic — turning ideas into 
   digital solutions that connect, empower, and inspire.
 </motion.p>
